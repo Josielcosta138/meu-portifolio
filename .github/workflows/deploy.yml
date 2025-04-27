@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # quando der push na branch main
+      - main # quando der push na branch main teste
 
 jobs:
   deploy:
