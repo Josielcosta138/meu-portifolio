@@ -81,7 +81,7 @@ function App() {
               transition: { duration: 0.3 }
             }}
           >
-            Seu Nome
+            Josiel Costa Martins
           </motion.h1>
         </div>
         
