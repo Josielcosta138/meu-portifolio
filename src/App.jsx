@@ -1,3 +1,4 @@
+					
 import { useState, useEffect } from 'react';
 import { 
   FaEnvelope, 
@@ -10,13 +11,54 @@ import {
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import fotoPerfil from '../src/assets/EuUse.png';
-import projeto1 from './assets/bug1.png';
+import projeto1 from './assets/titanium.png';
+import projeto2  from './assets/ecommerce.png'
 import './App.css';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('sobre');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+// ... seus outros estados
+const [currentSkills, setCurrentSkills] = useState(0);
+
+const skillGroups = [
+  {
+    title: "Front-end",
+    skills: "React | JavaScript | HTML5 | CSS3",
+    icon: "💻"
+  },
+  {
+    title: "Back-end", 
+    skills: "Java/Spring Boot | .NET C#",
+    icon: "⚙️"
+  },
+  {
+    title: "Banco de Dados",
+    skills: "PostgreSQL | SQL",
+    icon: "🗃️"
+  },
+  {
+    title: "QA & Automação",
+    skills: "Cypress | Postman | Testes de ERP",
+    icon: "🧪"
+  },
+  {
+    title: "Metodologias",
+    skills: "Scrum | Kanban | Gestão de Projetos",
+    icon: "🛠️"
+  }
+];
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentSkills((prev) => (prev + 1) % skillGroups.length);
+  }, 3000); // Muda a cada 3 segundos
+
+  return () => clearInterval(interval);
+}, []);
+
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -27,18 +69,32 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const projetos = [
-    {
-      id: 1,
-      titulo: "Sistema de Gestão",
-      descricao: "Sistema completo para gestão empresarial com React e Node.js",
-      tecnologias: ["React", "Node.js", "MongoDB"],
-      imagem: projeto1,
-      url: "https://github.com/Josielcosta138/titanium", //meusistema
-      github: "https://github.com/Josielcosta138/titanium-back"
-    },
-    // ... outros projetos
-  ];
+  const projetos = {
+    titanium: [
+      {
+        id: 1,
+        titulo: "Sistema para Controle de Corte",
+        descricao: "Sistema completo para gestão de corte têxtil com React e SpringBoot.",
+        tecnologias: ["React", "Java", "Postgres"],
+        imagem: projeto1,
+        url: "https://github.com/Josielcosta138/titanium",
+        github: "https://github.com/Josielcosta138/titanium-back"
+      }
+      // Adicione mais projetos Titanium se necessário
+    ],
+    ecommerce: [
+      {
+        id: 2,
+        titulo: "E-commerce Vendas Online",
+        descricao: "Plataforma de vendas online com carrinho de compras e pagamentos.",
+        tecnologias: ["React", "Node.js", "MongoDB"],
+        imagem: projeto2, // Importe a imagem do ecommerce
+        url: "#",
+        github: "#"
+      }
+      // Adicione mais projetos E-commerce se necessário
+    ]
+  };
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -130,15 +186,24 @@ function App() {
   </p>
   
   <div className="skills-section">
-    <h4>Minha Stack Principal:</h4>
-    <ul className="skills-list">
-      <li><span>💻 Front-end:</span> React | JavaScript | HTML5 | CSS3</li>
-      <li><span>⚙️ Back-end:</span> Java/Spring Boot | .NET C# (em estudo)</li>
-      <li><span>🗃️ Banco de Dados:</span> PostgreSQL | SQL</li>
-      <li><span>🧪 QA & Automação:</span> Cypress | Postman | Testes de ERP</li>
-      <li><span>🛠️ Metodologias:</span> Scrum | Kanban | Gestão de Projetos</li>
-    </ul>
-  </div>
+  <h4>Minha Stack Principal:</h4>
+  <AnimatePresence mode='wait'>
+    <motion.div
+      key={currentSkills}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="skill-group"
+    >
+      <div className="skill-icon">{skillGroups[currentSkills].icon}</div>
+      <div>
+        <h5>{skillGroups[currentSkills].title}</h5>
+        <p>{skillGroups[currentSkills].skills}</p>
+      </div>
+    </motion.div>
+  </AnimatePresence>
+</div>
 
   <p className="current-focus">
     <strong>Atualmente:</strong> Aprimorando conhecimentos em .NET C# e Entity Framework 
@@ -149,49 +214,82 @@ function App() {
       </motion.section>
 
       {/* Seção Projetos */}
-      <section id="projetos">
-        <h2>Projetos Destacados</h2>
-        
-        <div className="projetos-grid">
-          <AnimatePresence>
-            {projetos.map((projeto, index) => (
-              <motion.div
-                key={projeto.id}
-                className="projeto-card"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -10 }}
-              >
-                <div className="projeto-imagem-container">
-                  <img src={projeto.imagem} alt={projeto.titulo} className="projeto-imagem" />
-                  <div className="projeto-overlay">
-                    <div className="tecnologias">
-                      {projeto.tecnologias.map(tech => (
-                        <span key={tech}>{tech}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="projeto-info">
-                  <h3>{projeto.titulo}</h3>
-                  <p>{projeto.descricao}</p>
-                  
-                  <div className="projeto-links">
-                    <a href={projeto.url} target="_blank" rel="noreferrer">
-                      Ver Projeto <FaArrowRight />
-                    </a>
-                    <a href={projeto.github} target="_blank" rel="noreferrer">
-                      Código no GitHub <FaArrowRight />
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+      {/* Seção Projetos */}
+{/* Seção Projetos */}
+<section id="projetos">
+  <h2>Projetos Destacados</h2>
+  
+  <div className="projetos-container">
+    {/* Titanium */}
+    <motion.div
+      className="projeto-card"
+      initial={{ opacity: 0, x: -50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -10 }}
+    >
+      <div className="projeto-imagem-container">
+        <img src={projeto1} alt="Titanium - Sistema para Controle de Corte" className="projeto-imagem" />
+        <div className="projeto-overlay">
+          <div className="tecnologias">
+            <span>React.js</span>
+            <span>Java</span>
+            <span>Postgres</span>
+          </div>
         </div>
-      </section>
+      </div>
+      <div className="projeto-info">
+        <h3>Titanium - Sistema para Controle de Corte</h3>
+        <p>Sistema completo para gestão de corte têxtil com React e SpringBoot.</p>
+        <div className="projeto-links">
+          <a href="https://github.com/Josielcosta138/titanium" target="_blank" rel="noreferrer">
+            <FaArrowRight /> Ver Projeto
+          </a>
+          <a href="https://github.com/Josielcosta138/titanium-back" target="_blank" rel="noreferrer">
+            <FaGithub /> Código Fonte
+          </a>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* E-commerce */}
+    <motion.div
+      className="projeto-card"
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -10 }}
+    >
+      
+      <div className="projeto-imagem-container">
+        <img src={projeto2} alt="E-commerce Vendas Online" className="projeto-imagem" />
+        <div className="projeto-overlay">
+          <div className="tecnologias">
+            <span>React.js</span>
+            <span>Java</span>
+            <span>Postgres</span>
+          </div> 
+        </div> 
+      </div>
+      
+      <div className="projeto-info">
+        <h3>E-commerce Vendas Online</h3>
+        <p>Plataforma de vendas online com carrinho de compras e pagamentos.</p>
+        <div className="projeto-links">
+          <a href="https://github.com/Josielcosta138/ecommerceLux-Back-2" target="_blank" rel="noreferrer">
+            <FaArrowRight /> Ver Projeto
+          </a>
+          <a href="https://github.com/Josielcosta138/Ecommerce-Lux-Front" target="_blank" rel="noreferrer">
+            <FaGithub /> Código Fonte
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
+    {/* */}
+
 
       {/* Seção Contato */}
       <motion.section 
@@ -275,4 +373,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;	
