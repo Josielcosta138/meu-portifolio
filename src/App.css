@@ -615,3 +615,35 @@ footer {
 }
 
 /* Mantenha as outras regras existentes para .projeto-imagem-container */
+
+
+/* Estilos do carrossel */
+.projeto-imagem-container .slick-slider {
+  position: relative;
+}
+
+.projeto-imagem-container .slick-dots {
+  bottom: 20px;
+}
+
+.projeto-imagem-container .slick-dots li button:before {
+  color: white;
+  opacity: 0.5;
+  font-size: 10px;
+}
+
+.projeto-imagem-container .slick-dots li.slick-active button:before {
+  color: var(--primary);
+  opacity: 1;
+}
+
+/* Ajuste para manter o overlay */
+.projeto-imagem-container .slick-list, 
+.projeto-imagem-container .slick-track {
+  height: 100%;
+}
+
+.projeto-imagem-container .slick-slide > div {
+  height: 100%;
+  position: relative;
+}
