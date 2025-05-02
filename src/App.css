@@ -651,23 +651,28 @@ footer {
 
 .welcome-modal {
   position: fixed;
-  top: 20px; /* Distância do topo */
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--primary);
   color: white;
-  padding: 15px 30px;
+  padding: 12px 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 9999;
+  width: auto;
   max-width: 90%;
+  min-width: 250px; /* Largura mínima para evitar ficar muito estreito */
   text-align: center;
+  box-sizing: border-box;
 }
 
 .welcome-content h3 {
   margin: 0;
-  font-size: 1.2rem;
-  white-space: nowrap;
+  font-size: clamp(0.9rem, 3vw, 1.2rem); /* Tamanho responsivo */
+  white-space: normal; /* Permite quebra de linha */
+  word-break: break-word; /* Quebra palavras longas */
+  line-height: 1.4;
 }
 
 /* Animação de flutuação sutil */
@@ -678,4 +683,25 @@ footer {
 
 .welcome-modal {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Media queries para ajustes específicos em mobile */
+@media (max-width: 768px) {
+  .welcome-modal {
+    top: 10px;
+    padding: 10px 15px;
+    max-width: 95%; /* Usa mais espaço na tela */
+    min-width: 80%; /* Ocupa mais largura em mobile */
+  }
+  
+  .welcome-content h3 {
+    font-size: 1rem; /* Tamanho um pouco menor em mobile */
+    white-space: normal; /* Garante quebra de linha */
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-modal {
+    min-width: 90%; /* Ocupa quase toda a largura em telas muito pequenas */
+  }
 }
