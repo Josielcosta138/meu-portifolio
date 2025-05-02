@@ -32,7 +32,24 @@ function App() {
   const [activeSection, setActiveSection] = useState('sobre');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [currentSkills, setCurrentSkills] = useState(0);
- 
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    // Mostrar após 1 segundo
+    const showTimer = setTimeout(() => {
+      setShowWelcome(true);
+    }, 1000);
+
+    // Esconder após 3 segundos (1000ms para mostrar + 2000ms visível)
+    const hideTimer = setTimeout(() => {
+      setShowWelcome(false);
+    }, 6000);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
 
   const skillGroups = [
     {
@@ -121,6 +138,25 @@ function App() {
 
   return (
     <div className={`app ${darkMode ? 'dark' : 'light'}`}>
+
+ {/* Modal de boas-vindas */}
+ <AnimatePresence>
+        {showWelcome && (
+          <motion.div
+            className="welcome-modal"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <div className="welcome-content">
+              <h3>Fico muito feliz em você visitar o meu perfil! 😀</h3>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
       {/* Cursor personalizado */}
       <motion.div
         className="custom-cursor"

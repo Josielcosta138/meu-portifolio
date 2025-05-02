@@ -647,3 +647,35 @@ footer {
   height: 100%;
   position: relative;
 }
+
+
+.welcome-modal {
+  position: fixed;
+  top: 20px; /* Distância do topo */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  max-width: 90%;
+  text-align: center;
+}
+
+.welcome-content h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+/* Animação de flutuação sutil */
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.welcome-modal {
+  animation: float 3s ease-in-out infinite;
+}
