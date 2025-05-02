@@ -32,6 +32,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('sobre');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [currentSkills, setCurrentSkills] = useState(0);
+ 
 
   const skillGroups = [
     {
@@ -95,7 +96,7 @@ function App() {
         descricao: "Plataforma de vendas online com carrinho de compras e pagamentos.",
         tecnologias: ["React", "Node.js", "MongoDB"],
         imagens: [ecommerce1, ecommerce2, ecommerce3, ecommerce4, ecommerce5],
-        url: "https://github.com/Josielcosta138/ecommerceLux-Back-2",
+        url: "https://youtu.be/AtWlm-nv80w",
         github: "https://github.com/Josielcosta138/Ecommerce-Lux-Front"
       }
     ]
@@ -339,18 +340,27 @@ function App() {
       >
         <h2>Vamos Conversar</h2>
         
-        <div className="contato-container">
+        <div className="contato-container">          
           <form className="contato-form">
+          <span className="tooltip-icon">ℹ️
+              <span className="tooltip-text">
+                Estamos trabalhando em melhorias. Em breve, os campos abaixo estarão disponíveis.
+              </span>
+            </span>
             <div className="form-group">
-              <input type="text" placeholder="Seu Nome" required />
+              <input 
+                type="text" 
+                placeholder="Seu Nome" 
+                disabled 
+              />
             </div>
             <div className="form-group">
-              <input type="email" placeholder="Seu Email" required />
+              <input type="email" placeholder="Seu Email" disabled />
             </div>
             <div className="form-group">
-              <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
+              <textarea placeholder="Sua Mensagem" rows="5" disabled></textarea>
             </div>
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="submit-btn" disabled>
               Enviar Mensagem
             </button>
           </form>
