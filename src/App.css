@@ -745,3 +745,31 @@ footer {
   background: #1a1f2e;
   color: #fff;
 }
+
+
+.experiencia-atual {
+  margin: 25px 0;
+}
+
+.empresa-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.empresa-card h5 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.empresa-card span {
+  color: #4f8cff;
+  font-weight: 600;
+  display: block;
+  margin: 6px 0 10px;
+}
+
+.empresa-card p {
+  margin: 0;
+}

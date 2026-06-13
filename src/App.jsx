@@ -38,8 +38,9 @@ function App() {
   const [email, setEmail] = useState('');
   const [motivo, setMotivo] = useState('');
   const [observacoes, setObservacoes] = useState('');
-  // const [mensagem, setMensagem] = useState(''); 
+  const [website, setWebsite] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const API_URL = import.meta.env.VITE_API_URL;
   
 
   useEffect(() => {
@@ -153,9 +154,7 @@ const enviarTelegram = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch(
-      // 'http://localhost:3001/api/contato', --LOCAL
-      'https://meu-portifolio-8jvp.onrender.com/api/contato',
+    const response = await fetch( API_URL,
       {
         method: 'POST',
         headers: {
@@ -167,7 +166,8 @@ const enviarTelegram = async (e) => {
         whatsapp,
         email,
         motivo,
-        observacoes
+        observacoes,
+        website
       })
       }
     );
@@ -292,6 +292,22 @@ const enviarTelegram = async (e) => {
             <p>
               Profissional de Tecnologia com experiência em Automação de Testes, Qualidade de Software e sistemas ERP. Atuo com Cypress, testes E2E, APIs e integração contínua, garantindo a confiabilidade das aplicações. Formado em Análise e Desenvolvimento de Sistemas e em constante evolução técnica, com foco no aprimoramento em desenvolvimento Back-End e arquitetura de software.
             </p>
+
+            <div className="skills-section">
+              <h4>💼 Experiência Atual</h4>
+
+              <div className="empresa-card">
+                <h5>QA • Analise de Qualidade | Pleno</h5>
+                <span>Useall Software</span>
+
+                <p>
+                  Responsável pela garantia da qualidade de sistemas ERP,
+                  realizando testes manuais e automatizados, validação de APIs,
+                  homologação de funcionalidades e apoio na evolução contínua
+                  dos produtos.
+                </p>
+              </div>
+              </div>
             
             <div className="skills-section">
               <h4>Minha Stack Principal:</h4>
@@ -314,7 +330,7 @@ const enviarTelegram = async (e) => {
             </div>
 
             <p className="current-focus">
-              <strong>Atualmente:</strong> Aprimorando conhecimentos em .NET C# e Entity Framework 
+              <strong>👨‍🎓 - Atualmente:</strong> Aprimorando meus conhecimentos em .NET C#, Entity Framework e PL/SQL
               para expandir minhas capacidades no desenvolvimento de sistemas empresariais complexos.
             </p>
           </motion.div>
@@ -497,6 +513,8 @@ const enviarTelegram = async (e) => {
               <input
                 type="text"
                 name="website"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
                 style={{ display: 'none' }}
               />
 
