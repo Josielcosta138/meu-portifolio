@@ -154,7 +154,8 @@ const enviarTelegram = async (e) => {
 
   try {
     const response = await fetch(
-      'http://localhost:3001/api/contato',
+      // 'http://localhost:3001/api/contato', --LOCAL
+      'https://meu-portifolio-8jvp.onrender.com/api/contato',
       {
         method: 'POST',
         headers: {
