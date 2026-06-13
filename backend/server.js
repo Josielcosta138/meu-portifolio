@@ -29,6 +29,13 @@ const limiter = rateLimit({
 });
 
 app.post('/api/contato', limiter, async (req, res) => {
+  console.log('Nova requisição recebida:', {
+    data: new Date().toISOString(),
+    ip: req.ip,
+    nome: req.body.nome,
+    email: req.body.email
+  });
+
   try {
 
     const {
@@ -112,7 +119,10 @@ ${observacoesLimpa || "Nenhuma observação"}
         chat_id: process.env.TELEGRAM_CHAT_ID,
         text: texto
       }
-    );
+      );
+      console.log(
+      `Mensagem enviada para Telegram: ${email}`
+      );
 
     return res.status(200).json({
       sucesso: true
@@ -120,6 +130,10 @@ ${observacoesLimpa || "Nenhuma observação"}
 
   } catch (erro) {
     console.error(erro);
+    console.error(
+      'Erro ao enviar Telegram:',
+      erro.response?.data || erro.message
+)   ;
 
     return res.status(500).json({
       sucesso: false
