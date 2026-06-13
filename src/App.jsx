@@ -12,7 +12,7 @@ import {
   FaArrowRight
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import fotoPerfil from '../src/assets/EuUse.png';
+import fotoPerfil from '../src/assets/euPeerfil.jpg';
 //Ecomerce
 import ecommerce1 from './assets/ecomerce/ecommerce.png';
 import ecommerce2 from './assets/ecomerce/detalhes-produto-ecom.png';
@@ -28,7 +28,7 @@ import titanium4 from './assets/titanium/pre-corte.png';
 import './App.css';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('sobre');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [currentSkills, setCurrentSkills] = useState(0);
@@ -119,10 +119,13 @@ function App() {
     ]
   };
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle('dark-mode');
-  };
+  useEffect(() => {
+  document.body.classList.add('dark');
+}, []);
+const toggleDarkMode = () => {
+  setDarkMode(!darkMode);
+  document.body.classList.toggle('dark');
+};
 
   // Configurações do carrossel
   const carouselSettings = {
@@ -234,9 +237,7 @@ function App() {
             transition={{ duration: 0.8 }}
           >
             <p>
-              Desenvolvedor Full-Stack formado em Análise e Desenvolvimento de Sistemas pelo SENAC, 
-              com 3 anos de experiência como QA em desenvolvimento de ERP. Apaixonado por criar 
-              soluções digitais robustas que unem qualidade técnica e experiência do usuário.
+              Profissional de Tecnologia com experiência em Automação de Testes, Qualidade de Software e sistemas ERP. Atuo com Cypress, testes E2E, APIs e integração contínua, garantindo a confiabilidade das aplicações. Formado em Análise e Desenvolvimento de Sistemas e em constante evolução técnica, com foco no aprimoramento em desenvolvimento Back-End e arquitetura de software.
             </p>
             
             <div className="skills-section">
