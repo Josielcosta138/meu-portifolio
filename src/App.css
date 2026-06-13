@@ -709,3 +709,39 @@ footer {
     min-width: 90%; /* Ocupa quase toda a largura em telas muito pequenas */
   }
 }
+
+
+.custom-select {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 8px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  color: #fff;
+  font-size: 1rem;
+
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.custom-select:hover {
+  border-color: #5b8cff;
+}
+
+.custom-select:focus {
+  border-color: #5b8cff;
+  box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.2);
+}
+
+.custom-select option {
+  background: #1a1f2e;
+  color: #fff;
+}

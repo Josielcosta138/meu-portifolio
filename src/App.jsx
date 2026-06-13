@@ -33,6 +33,14 @@ function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [currentSkills, setCurrentSkills] = useState(0);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [nome, setNome] = useState('');
+  const [empresa, setEmpresa] = useState('');
+  const [email, setEmail] = useState('');
+  const [motivo, setMotivo] = useState('');
+  const [observacoes, setObservacoes] = useState('');
+  // const [mensagem, setMensagem] = useState(''); 
+  const [whatsapp, setWhatsapp] = useState('');
+  
 
   useEffect(() => {
     // Mostrar após 1 segundo
@@ -138,6 +146,50 @@ const toggleDarkMode = () => {
     autoplaySpeed: 3000,
     arrows: false
   };
+
+
+  // Função TELEGRAM
+const enviarTelegram = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch(
+      'http://localhost:3001/api/contato',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        nome,
+        empresa,
+        whatsapp,
+        email,
+        motivo,
+        observacoes
+      })
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.sucesso) {
+      alert('Mensagem enviada com sucesso!');
+
+      setNome('');
+      setEmail('');
+      setEmpresa('');
+      setWhatsapp('(00) 00000-0000');
+      setObservacoes('');
+    } else {
+      alert('Erro ao enviar mensagem.');
+    }
+
+  } catch (erro) {
+    console.error(erro);
+    alert('Erro ao conectar com servidor.');
+  }
+};
 
   return (
     <div className={`app ${darkMode ? 'dark' : 'light'}`}>
@@ -378,28 +430,99 @@ const toggleDarkMode = () => {
         <h2>Vamos Conversar</h2>
         
         <div className="contato-container">          
-          <form className="contato-form">
-          <span className="tooltip-icon">ℹ️
+          <form
+          className="contato-form"
+          onSubmit={enviarTelegram}
+          >
+          <span className="tooltip-icon">
               <span className="tooltip-text">
-                Estamos trabalhando em melhorias. Em breve, os campos abaixo estarão disponíveis.
+                💬 Utilize o formulário abaixo para oportunidades profissionais, projetos freelance ou parcerias. Sua mensagem será enviada diretamente para mim.
               </span>
             </span>
             <div className="form-group">
-              <input 
-                type="text" 
-                placeholder="Seu Nome" 
-                disabled 
+            <label>💬 Motivo do contato</label>
+
+         <select
+            className="custom-select"
+            value={motivo}
+            onChange={(e) => setMotivo(e.target.value)}
+            required
+          >
+            <option value="">Selecione uma opção</option>
+            <option value="Vaga de Emprego">💼 Vaga de Emprego</option>
+            <option value="Freelancer">💻 Freelancer</option>
+            <option value="Parceria">🤝 Parceria</option>
+            <option value="Outro">📌 Outro</option>
+          </select>
+          </div>
+
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Seu Nome"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Empresa (Opcional)"
+                  value={empresa}
+                  onChange={(e) => setEmpresa(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="tel"
+                  placeholder="📱 WhatsApp"
+                  value={whatsapp}
+                  onChange={(e) => {
+                    let valor = e.target.value.replace(/\D/g, '');
+
+                    valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2');
+                    valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
+
+                    setWhatsapp(valor);
+                  }}
+                  maxLength={15}
+                  required
+                />
+              </div>
+
+              <input
+                type="text"
+                name="website"
+                style={{ display: 'none' }}
               />
-            </div>
-            <div className="form-group">
-              <input type="email" placeholder="Seu Email" disabled />
-            </div>
-            <div className="form-group">
-              <textarea placeholder="Sua Mensagem" rows="5" disabled></textarea>
-            </div>
-            <button type="submit" className="submit-btn" disabled>
-              Enviar Mensagem
-            </button>
+
+              <div className="form-group">
+                <input
+                  type="email"
+                  placeholder="Seu E-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+        </div>
+        <div className="form-group">
+  <textarea
+    placeholder="📝 Observações (Opcional)"
+    value={observacoes}
+    onChange={(e) => setObservacoes(e.target.value)}
+    rows="4"
+  />
+</div>
+
+<button
+  type="submit"
+  className="submit-btn"
+>
+  🚀 Enviar Mensagem
+</button>
           </form>
           
           <div className="contato-info">
