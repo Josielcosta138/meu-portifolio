@@ -45,7 +45,7 @@ body {
   border-radius: 50%;
   background-color: var(--primary);
   opacity: 0.3;
-  pointer-events: none;
+  /* pointer-events: none; */
   z-index: 9999;
   mix-blend-mode: multiply;
 }
@@ -772,4 +772,225 @@ footer {
 
 .empresa-card p {
   margin: 0;
+}
+
+/* ===== Modal Galeria ===== */
+
+.modal-galeria {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.92);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 99999;
+  backdrop-filter: blur(4px);
+}
+
+.modal-conteudo {
+  width: 90%;
+  max-width: 1400px;
+  position: relative;
+}
+
+.imagem-modal {
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.btn-fechar {
+  position: absolute;
+  top: -50px;
+  right: 0;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.1);
+  color: white;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  transition: 0.2s;
+  z-index: 100000;
+}
+
+.btn-fechar:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+
+.zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  background: rgba(0,0,0,0.7);
+  color: white;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 12px;
+  z-index: 5;
+
+  opacity: 0;
+  transition: .3s;
+}
+
+.projeto-imagem-container:hover .zoom-hint {
+  opacity: 1;
+}
+
+.modal-galeria .slick-prev,
+.modal-galeria .slick-next {
+  z-index: 999999;
+  width: 60px;
+  height: 60px;
+}
+
+.modal-galeria .slick-prev {
+  left: -70px;
+}
+
+.modal-galeria .slick-next {
+  right: -70px;
+}
+
+.modal-galeria .slick-prev:before,
+.modal-galeria .slick-next:before {
+  font-size: 50px;
+  color: white;
+}
+
+.imagem-click-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  background: rgba(0,0,0,.75);
+  color: white;
+
+  text-align: center;
+
+  padding: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  z-index: 20;
+
+  /* pointer-events: none; */
+}
+
+.projeto-imagem {
+  cursor: zoom-in;
+  transition: all .3s ease;
+}
+
+.projeto-imagem:hover {
+  filter: brightness(1.08);
+}
+
+.slide-clickavel {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.projeto-imagem {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.imagem-click-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+}
+
+.imagem-click-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  background: rgba(0,0,0,.75);
+  color: white;
+
+  text-align: center;
+
+  padding: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  z-index: 9999;
+
+  cursor: pointer;
+}
+
+.imagem-click-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  padding: 12px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.95),
+    rgba(0,0,0,.7)
+  );
+
+  color: white;
+  text-align: center;
+  font-weight: 600;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  transition: .2s;
+}
+
+.imagem-click-overlay:hover {
+  background: rgba(91,141,239,.95);
+}
+
+.modal-dica-navegacao {
+  margin-top: 15px;
+
+  text-align: center;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  background: rgba(255,255,255,0.08);
+  padding: 10px 15px;
+
+  border-radius: 10px;
+
+  backdrop-filter: blur(4px);
 }

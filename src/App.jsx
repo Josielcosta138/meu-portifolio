@@ -24,6 +24,21 @@ import titanium1 from './assets/titanium/titanium.png';
 import titanium2 from './assets/titanium/cadastro-ordem-corte.png';
 import titanium3 from './assets/titanium/lista-ordem-servico.png';
 import titanium4 from './assets/titanium/pre-corte.png';
+//ConstrucCore
+import conferencia from './assets/construCore/conferencia.png';
+import dashboard from './assets/construCore/dashboard.jpg';
+import entradaMateriais from './assets/construCore/entradaMateriais.jpg';
+import gestaoDeCompras from './assets/construCore/gestaoDeCompras.jpg';
+import inicioFluxoOperacional from './assets/construCore/inicioFluxoOperacional1.jpg';
+import inventarioMateriais from './assets/construCore/iventarioMateriais.jpg';
+import loginConstruCore from './assets/construCore/Login.jpg';
+import movimentacaoEstoque from './assets/construCore/movimentacaoEstoque.jpg';
+import pedidosDeCompras from './assets/construCore/pedidosDeCompras.jpg';
+import telaInicio from './assets/construCore/telaInicio.jpg';
+import usuariosPermissoes from './assets/construCore/usuariosPermissoes.jpg';
+
+import cadastrarPedidoComprasPt2 from './assets/construCore/cadastrarPedidoComprasPt2.jpg';
+import cadastroPedidoDeCompras from './assets/construCore/cadastroPedidoDeCompras.jpg';
 
 import './App.css';
 
@@ -41,7 +56,10 @@ function App() {
   const [website, setWebsite] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const API_URL = import.meta.env.VITE_API_URL;
-  
+  const [modalAberto, setModalAberto] = useState(false);
+  const [imagensModal, setImagensModal] = useState([]);
+  const [imagemInicial, setImagemInicial] = useState(0);
+    
 
   useEffect(() => {
     // Mostrar após 1 segundo
@@ -104,6 +122,34 @@ function App() {
   }, []);
 
   const projetos = {
+    construCore: [
+  {
+    id: 3,
+    titulo: "ConstrucCore",
+    descricao:
+      "Sistema web para gestão de construtoras, contemplando compras, estoque, inventário de materiais, conferência, fluxo operacional, permissões de usuários e indicadores gerenciais. [React, .NET, PostgreSQL]",
+    tecnologias: ["React", ".NET", "PostgreSQL"],
+
+    imagens: [
+      loginConstruCore,
+      dashboard,
+      telaInicio,
+      cadastroPedidoDeCompras,
+      cadastrarPedidoComprasPt2,
+      pedidosDeCompras,
+      entradaMateriais,
+      movimentacaoEstoque,
+      inventarioMateriais,
+      gestaoDeCompras,
+      conferencia,
+      usuariosPermissoes,
+      inicioFluxoOperacional
+    ],
+
+    url: "#", // se tiver
+    github: "https://github.com/Josielcosta138/ConstrucCore"
+  }
+],
     titanium: [
       {
         id: 1,
@@ -138,14 +184,14 @@ const toggleDarkMode = () => {
 
   // Configurações do carrossel
   const carouselSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: false
   };
 
 
@@ -193,7 +239,48 @@ const enviarTelegram = async (e) => {
 };
 
   return (
+
     <div className={`app ${darkMode ? 'dark' : 'light'}`}>
+
+ {/* todo o site */}
+
+    {modalAberto && (
+      <div
+        className="modal-galeria"
+        onClick={() => setModalAberto(false)}
+      >
+        <div
+          className="modal-conteudo"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="btn-fechar"
+            onClick={() => setModalAberto(false)}
+          >
+            ✕
+          </button>
+
+          <Slider
+            {...carouselSettings}
+            initialSlide={imagemInicial}
+          >
+            {imagensModal.map((img, idx) => (
+              <div key={idx}>
+                <img
+                  src={img}
+                  alt={`Imagem ${idx}`}
+                  className="imagem-modal"
+                />
+              </div>
+            ))}
+          </Slider>
+              <div className="modal-dica-navegacao">
+              <span>❮❮</span> 👆 Deslize para os lados <span>❯❯</span>            
+              </div>
+          
+        </div>
+      </div>
+    )}
 
  {/* Modal de boas-vindas */}
  <AnimatePresence>
@@ -358,12 +445,92 @@ const enviarTelegram = async (e) => {
                 <Slider {...carouselSettings}>
                   {projeto.imagens.map((imagem, index) => (
                     <div key={index}>
-                      <img 
-                        src={imagem} 
-                        alt={`${projeto.titulo} - Imagem ${index + 1}`} 
-                        className="projeto-imagem"
-                      />
-                      <div className="projeto-overlay">
+                      <div
+              className="slide-clickavel"
+              onClick={() => {
+                setImagensModal(projeto.imagens);
+                setImagemInicial(index);
+                setModalAberto(true);
+              }}
+            >
+              <img
+                src={imagem}
+                alt={`${projeto.titulo} - Imagem ${index + 1}`}
+                className="projeto-imagem"
+              />
+
+              <div
+              className="imagem-click-overlay"
+              onClick={() => {
+                setImagensModal(projeto.imagens);
+                setImagemInicial(index);
+                setModalAberto(true);
+              }}
+            >
+              🔍 Clique na imagem para ampliar
+            </div>
+            </div>
+                       <div className="projeto-overlay">
+                        <div className="tecnologias">
+                          {projeto.tecnologias.map((tech, i) => (
+                            <span key={i}>{tech}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+                
+              </div>
+              <div className="projeto-info">
+                <h3>{projeto.titulo}</h3>
+                <p>{projeto.descricao}</p>
+                <div className="projeto-links">
+                  <a href={projeto.url} target="_blank" rel="noreferrer">
+                    <FaArrowRight /> Ver Projeto
+                  </a>
+                  <a href={projeto.github} target="_blank" rel="noreferrer">
+                    <FaGithub /> Código Fonte
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* ConstrucCore */}
+          {projetos.construCore.map((projeto) => (
+            <motion.div
+              key={projeto.id}
+              className="projeto-card"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -10 }}
+            >
+              <div className="projeto-imagem-container">
+                <Slider {...carouselSettings}>
+                  {projeto.imagens.map((imagem, index) => (
+  <div key={index}>
+    <div
+      className="slide-clickavel"
+      onClick={() => {
+        setImagensModal(projeto.imagens);
+        setImagemInicial(index);
+        setModalAberto(true);
+      }}
+    >
+      <img
+        src={imagem}
+        alt={`${projeto.titulo} - Imagem ${index + 1}`}
+        className="projeto-imagem"
+      />
+
+      <div className="imagem-click-overlay">
+        🔍 Clique na imagem para ampliar
+      </div>
+    </div>
+
+    <div className="projeto-overlay">
                         <div className="tecnologias">
                           {projeto.tecnologias.map((tech, i) => (
                             <span key={i}>{tech}</span>
@@ -374,14 +541,26 @@ const enviarTelegram = async (e) => {
                   ))}
                 </Slider>
               </div>
+
               <div className="projeto-info">
                 <h3>{projeto.titulo}</h3>
+
                 <p>{projeto.descricao}</p>
+
                 <div className="projeto-links">
-                  <a href={projeto.url} target="_blank" rel="noreferrer">
+                  <a
+                    href={projeto.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <FaArrowRight /> Ver Projeto
                   </a>
-                  <a href={projeto.github} target="_blank" rel="noreferrer">
+
+                  <a
+                    href={projeto.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <FaGithub /> Código Fonte
                   </a>
                 </div>
@@ -403,11 +582,25 @@ const enviarTelegram = async (e) => {
                 <Slider {...carouselSettings}>
                   {projeto.imagens.map((imagem, index) => (
                     <div key={index}>
-                      <img 
-                        src={imagem} 
-                        alt={`${projeto.titulo} - Imagem ${index + 1}`} 
-                        className="projeto-imagem"
-                      />
+                      <div
+                        className="slide-clickavel"
+                        onClick={() => {
+                          setImagensModal(projeto.imagens);
+                          setImagemInicial(index);
+                          setModalAberto(true);
+                        }}
+                      >
+                        <img
+                          src={imagem}
+                          alt={`${projeto.titulo} - Imagem ${index + 1}`}
+                          className="projeto-imagem"
+                        />
+
+                        <div className="imagem-click-overlay">
+                          🔍 Clique na imagem para ampliar
+                        </div>
+                      </div>
+
                       <div className="projeto-overlay">
                         <div className="tecnologias">
                           {projeto.tecnologias.map((tech, i) => (
