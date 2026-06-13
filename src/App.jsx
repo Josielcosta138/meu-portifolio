@@ -25,7 +25,7 @@ import titanium2 from './assets/titanium/cadastro-ordem-corte.png';
 import titanium3 from './assets/titanium/lista-ordem-servico.png';
 import titanium4 from './assets/titanium/pre-corte.png';
 //ConstrucCore
-import conferencia from './assets/construCore/conferencia.png';
+import conferencia from './assets/construCore/Conferencia.png';
 import dashboard from './assets/construCore/dashboard.jpg';
 import entradaMateriais from './assets/construCore/entradaMateriais.jpg';
 import gestaoDeCompras from './assets/construCore/gestaoDeCompras.jpg';

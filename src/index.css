@@ -1,3 +1,6 @@
+/* Ícones (Font Awesome) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
 /* Estilos Gerais */
 :root {
   --primary-color: #0077ff;
@@ -130,8 +133,6 @@
   color: var(--primary-color);
 }
 
-/* Ícones (Font Awesome) */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 /* Responsivo */
 @media (max-width: 768px) {
