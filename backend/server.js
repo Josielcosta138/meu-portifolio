@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 3,
+  max: 2,
   message: {
     sucesso: false,
     mensagem: 'Muitas tentativas. Tente novamente mais tarde.'
