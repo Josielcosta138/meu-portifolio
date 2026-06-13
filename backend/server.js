@@ -13,6 +13,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online'
+  });
+});
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -38,7 +43,7 @@ app.post('/api/contato', limiter, async (req, res) => {
     
    
 
-    const nomeLimpo = validator.escape(nome);
+    const nomeLimpo = validator.escape(nome || '');
     const empresaLimpa = validator.escape(empresa || '');
     const observacoesLimpa = validator.escape(observacoes || '');
 
@@ -57,6 +62,13 @@ app.post('/api/contato', limiter, async (req, res) => {
     if (!email || email.length > 150) {
       return res.status(400).json({
         sucesso: false
+      });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: 'E-mail inválido'
       });
     }
         if (!nomeLimpo || !email || !whatsapp || !motivo) {
@@ -91,7 +103,7 @@ app.post('/api/contato', limiter, async (req, res) => {
 ${emojiMotivo[motivo]} ${motivo}
 
 📝 Observações:
-${observacoes || "Nenhuma observação"}
+${observacoesLimpa || "Nenhuma observação"}
 `;
 
     await axios.post(
@@ -115,8 +127,14 @@ ${observacoes || "Nenhuma observação"}
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(
-    `Servidor rodando na porta ${process.env.PORT}`
-  );
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+// app.listen(process.env.PORT, () => {
+//   console.log(
+//     `Servidor rodando na porta ${process.env.PORT}`
+//   );
+// });
