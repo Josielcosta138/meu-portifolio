@@ -720,7 +720,7 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 
-  color: #fff;
+  color: #4361ee;
   font-size: 1rem;
 
   outline: none;
@@ -732,7 +732,7 @@ footer {
   -moz-appearance: none;
 }
 
-.custom-select:hover {
+.custom-select {
   border-color: #5b8cff;
 }
 
@@ -742,7 +742,7 @@ footer {
 }
 
 .custom-select option {
-  background: #1a1f2e;
+  background: #4361ee;
   color: #fff;
 }
 

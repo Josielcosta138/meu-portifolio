@@ -43,7 +43,7 @@ import cadastroPedidoDeCompras from './assets/construCore/cadastroPedidoDeCompra
 import './App.css';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('sobre');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [currentSkills, setCurrentSkills] = useState(0);
@@ -175,7 +175,7 @@ function App() {
   };
 
   useEffect(() => {
-  document.body.classList.add('dark');
+  // document.body.classList.add('dark');
 }, []);
 const toggleDarkMode = () => {
   setDarkMode(!darkMode);
@@ -426,7 +426,7 @@ const enviarTelegram = async (e) => {
 
       {/* Seção Projetos */}
       <section id="projetos">
-        <h2>Projetos Destacados</h2>
+        <h2>Projetos Pessoais</h2>
         
         <div className="projetos-container">
 
@@ -658,7 +658,7 @@ const enviarTelegram = async (e) => {
             onChange={(e) => setMotivo(e.target.value)}
             required
           >
-            <option value="">Selecione uma opção</option>
+            <option value="">👉 Selecione uma opção</option>
             <option value="Vaga de Emprego">💼 Vaga de Emprego</option>
             <option value="Freelancer">💻 Freelancer</option>
             <option value="Parceria">🤝 Parceria</option>
